@@ -1,6 +1,7 @@
 package org.launchcode.bookthymeleaf.controllers;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
@@ -15,9 +16,9 @@ public class BookController {
 
     // GET /book -> returns a JSON List of all the books
     @GetMapping
-    @ResponseBody
-    public ArrayList<HashMap<String, String>> getBooks() {
-        return books;
+    public String getBooks(Model model) {
+        model.addAttribute("books", books);
+        return "bookIndex";
     }
 
     // GET /book/new -> returns an HTML form
