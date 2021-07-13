@@ -23,15 +23,8 @@ public class BookController {
 
     // GET /book/new -> returns an HTML form
     @GetMapping(value = "/new")
-    @ResponseBody
     public String addBookForm() {
-        String newBookForm = "<form action='/book/new' method='POST'>";
-        newBookForm += "<label>Title: <input type='text' name='title'></label><br />";
-        newBookForm += "<label>Author: <input type='text' name='author'></label><br />";
-        newBookForm += "<label>ISBN: <input type='text' name='isbn'></label><br />";
-        newBookForm += "<input type='submit'>";
-        newBookForm += "</form>";
-        return newBookForm;
+        return "newBookForm";
     }
 
     // POST /book/new -> takes in three query parameters: title, author, isbn and creates a new book out of these query parameters (these were the inputs of the HTML form in the GET handler)
