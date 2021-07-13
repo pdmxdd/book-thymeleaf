@@ -41,28 +41,28 @@ public class BookController {
 
     // GET /book/author/authorName -> returns a JSON List of all the books matching the path variable authorName
     @GetMapping(value = "/author/{authorName}")
-    @ResponseBody
-    public ArrayList<HashMap<String, String>> getBooksByAuthor(@PathVariable String authorName) {
+    public String getBooksByAuthor(@PathVariable String authorName, Model model) {
         ArrayList<HashMap<String, String>> matchingBooks = new ArrayList<>();
         for(HashMap<String, String> book : books) {
             if(book.get("author").equals(authorName)) {
                 matchingBooks.add(book);
             }
         }
-        return matchingBooks;
+        model.addAttribute("books", matchingBooks);
+        return "filterBooks";
     }
 
     // GET /book/title/titleName -> Returns a JSON List of all the books matching the path variable titleName
     @GetMapping(value = "/title/{titleName}")
-    @ResponseBody
-    public ArrayList<HashMap<String, String>> getBooksByTitle(@PathVariable String titleName) {
+    public String getBooksByTitle(@PathVariable String titleName, Model model) {
         ArrayList<HashMap<String, String>> matchingBooks = new ArrayList<>();
         for(HashMap<String, String> book : books) {
             if(book.get("title").equals(titleName)) {
                 matchingBooks.add(book);
             }
         }
-        return matchingBooks;
+        model.addAttribute("books", matchingBooks);
+        return "filterBooks";
     }
 
     // a helper method that adds a new book to our static books property
