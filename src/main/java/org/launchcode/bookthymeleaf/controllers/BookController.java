@@ -29,14 +29,14 @@ public class BookController {
 
     // POST /book/new -> takes in three query parameters: title, author, isbn and creates a new book out of these query parameters (these were the inputs of the HTML form in the GET handler)
     @PostMapping(value = "/new")
-    @ResponseBody
-    public String addBook(@RequestParam String title, @RequestParam String author, @RequestParam String isbn) {
+    public String addBook(@RequestParam String title, @RequestParam String author, @RequestParam String isbn, Model model) {
         HashMap<String, String> newBook = new HashMap<>();
         newBook.put("title", title);
         newBook.put("author", author);
         newBook.put("ISBN", isbn);
         addBook(newBook);
-        return "OK";
+        model.addAttribute("bookName", title);
+        return "bookAdded";
     }
 
     // GET /book/author/authorName -> returns a JSON List of all the books matching the path variable authorName
